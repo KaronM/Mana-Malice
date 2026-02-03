@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://tiae01jxtfuc"]
+
+[ext_resource type="PackedScene" uid="uid://cfu8m3htj0au4" path="res://Scenes/Player/player.tscn" id="1_jjgbg"]
+
+[sub_resource type="Environment" id="Environment_jjgbg"]
+background_energy_multiplier = 0.83
+ambient_light_color = Color(0.418483, 0.447837, 0.431362, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(64.9517, 0, 0, 0, 0.234943, 0, 0, 0, 56.7745, -0.111961, -0.0639544, -1.09611)
+use_collision = true
+
+[node name="Building" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Building"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Window" type="CSGBox3D" parent="Building"]
+transform = Transform3D(-18.8177, 0, 0, 0, 3.62996, 0, 0, 0, 12.5949, -1.59556, 11.0667, -1.88094)
+operation = 2
+calculate_tangents = false
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 17)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jjgbg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.998159, 0.027148, -0.0542304, 0.00625244, 0.843381, 0.53728, 0.060323, -0.53663, 0.841659, -4, 19, 16)
+light_angular_distance = 85.45
