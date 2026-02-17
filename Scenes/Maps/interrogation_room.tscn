@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by6h6sdj5efix" path="res://Scripts/interrogation_room.gd" id="1_gjh31"]
 [ext_resource type="PackedScene" uid="uid://crn83ih6oruo2" path="res://Assets/Furniture/coffee_table.blend" id="2_l31cg"]
-[ext_resource type="PackedScene" uid="uid://cvqqgp2v425eq" path="res://Scenes/Characters/suspect.tscn" id="3_eo4eq"]
+[ext_resource type="PackedScene" uid="uid://cvqqgp2v425eq" path="res://Scenes/Entities/suspect.tscn" id="3_eo4eq"]
 [ext_resource type="Texture2D" uid="uid://dk0wkehgf7gx" path="res://Assets/Characters/Placeholders/SuspectPlaceholder-Picsart-BackgroundRemover.png" id="4_qgyuh"]
 [ext_resource type="PackedScene" uid="uid://d1oyesd6ixbun" path="res://Scenes/Player/player_camera.tscn" id="5_gjh31"]
 
