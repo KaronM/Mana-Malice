@@ -1,0 +1,9 @@
+~ start
+Vane: [[Hi|Hello|Howdy]], this is some dialogue.
+Vane: Hiya There are some choices. Hiya There are some choices. Hiya There are some choices. Hiya There are some choices. Hiya There are some choices. Hiya There are some choices. Hiya There are some choices.
+You: Hello There 
+
+- Start again => start
+- End the conversation => END
+Nathan: For more information see the online documentation.
+=> END

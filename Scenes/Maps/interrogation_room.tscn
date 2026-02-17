@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://7kgmuvrwaqom"]
+
+[ext_resource type="Script" uid="uid://by6h6sdj5efix" path="res://Scripts/interrogation_room.gd" id="1_gjh31"]
+[ext_resource type="PackedScene" uid="uid://crn83ih6oruo2" path="res://Assets/Furniture/coffee_table.blend" id="2_l31cg"]
+[ext_resource type="PackedScene" uid="uid://cvqqgp2v425eq" path="res://Scenes/Characters/suspect.tscn" id="3_eo4eq"]
+[ext_resource type="Texture2D" uid="uid://dk0wkehgf7gx" path="res://Assets/Characters/Placeholders/SuspectPlaceholder-Picsart-BackgroundRemover.png" id="4_qgyuh"]
+[ext_resource type="PackedScene" uid="uid://d1oyesd6ixbun" path="res://Scenes/Player/player_camera.tscn" id="5_gjh31"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntajy"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(0, 0.2334, 0.233602, 1)
+rim = 0.0
+rim_tint = 0.24
+refraction_enabled = true
+refraction_scale = 0.25
+refraction_texture_channel = 2
+
+[node name="InterrogationRoom" type="Node3D"]
+script = ExtResource("1_gjh31")
+
+[node name="Main" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.65, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.7)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, 4.9)
+calculate_tangents = false
+
+[node name="Wall4" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+
+[node name="WindowOpening1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+operation = 2
+calculate_tangents = false
+
+[node name="Window1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.04, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+material = SubResource("StandardMaterial3D_ntajy")
+
+[node name="Wall2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, 9.07692, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="Wall3" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, -9.38461, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="Floor" type="CSGBox3D" parent="Main"]
+transform = Transform3D(20.7413, 0, 0, 0, 0.211449, 0, 0, 0, 11.5788, -0.111961, -1.3712, -1.09611)
+use_collision = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.995387, -0.0807457, -0.0518233, 0.0526243, 0.00782182, 0.998584, -0.080226, -0.996704, 0.0120349, -4.18806, 5.17754, 0.354797)
+
+[node name="Furniture" type="Node" parent="."]
+
+[node name="coffee_table" parent="Furniture" instance=ExtResource("2_l31cg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503566, -1.08839)
+
+[node name="Suspect" parent="." instance=ExtResource("3_eo4eq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854213, 1.51619, -1.52106)
+characterPNG = ExtResource("4_qgyuh")
+characterName = "Suspect1"
+
+[node name="PlayerCamera" parent="." instance=ExtResource("5_gjh31")]
+transform = Transform3D(0.0127406, 0, 0.999919, 0, 1, 0, -0.999919, 0, 0.0127406, 1.15743, 1.4146, -1.72331)

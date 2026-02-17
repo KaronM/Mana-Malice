@@ -1,4 +1,5 @@
-# ProtoController v1.0 by Brackeys
+# ProtoController v1.0 by Brackeys and Thunder Bubble's interaction System *with some adjustments
+#URLs - https://github.com/Brackeys/brackeys-proto-controller, https://www.youtube.com/watch?v=1dGwbXdlzqM
 # CC0 License
 
 extends CharacterBody3D
@@ -13,6 +14,8 @@ extends CharacterBody3D
 @export var can_sprint : bool = false
 ## Can we press to enter freefly mode (noclip)?
 @export var can_freefly : bool = false
+## Can we look around 
+@export var can_look: bool = true
 
 @export_group("Speeds")
 ## Look around rotation speed.
@@ -50,21 +53,36 @@ var freeflying : bool = false
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $CollisionShape3D
+@onready var raycast: RayCast3D = $Head/Camera3D/RayCast3D
+@onready var reticle: TextureRect = $Reticle
+@onready var inspectLabel : Label = $Label
+
+
+
+#for dialogue
+var isTalking : bool = false
+var isTyping : bool = false
+
 
 func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	#connect dialogue ending to function
+	Engine.get_singleton("DialogueManager").dialogue_started.connect(toggle_dialogue_on)
+	Engine.get_singleton("DialogueManager").dialogue_ended.connect(toggle_dialogue_off)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	# Mouse capturing
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !isTalking:
 		capture_mouse()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()
+	if Input.is_action_just_pressed("activate"):
+		activate()
 	
 	# Look around
-	if mouse_captured and event is InputEventMouseMotion:
+	if mouse_captured and can_look and event is InputEventMouseMotion:
 		rotate_look(event.relative)
 	
 	# Toggle freefly mode
@@ -76,6 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# If freeflying, handle freefly and nothing else
+	
 	if can_freefly and freeflying:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
 		var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -115,8 +134,69 @@ func _physics_process(delta: float) -> void:
 	
 	# Use velocity to actually move
 	move_and_slide()
+	check_hover_collision()
+
+#for activation of interact 
+func activate():
+	var hit = raycast.get_collider()
+	if mouse_captured and raycast.is_colliding() and !isTalking:  # Only allow shooting when cursor is locked
+		if hit and hit is Character and hit.has_method("interact"): #if interacted with character
+			#toggle_dialogue_on()
+			if hit.dialogueResource == null:
+				push_error("Missing dialogue resource on: " + hit.name)
+				return
+			DialogueManager.show_dialogue_balloon(hit.dialogueResource, "start")
+			hit.interact()
+
+#when hovering over an object
+func check_hover_collision():
+	#hovered object
+	var hover_collider
+
+	if raycast.is_colliding() and !isTalking: #if colliding
+		
+		hover_collider = raycast.get_collider()
+		
+		if hover_collider and is_instance_valid(hover_collider):
+			
+			#if a character is hovered
+			if hover_collider is Character:
+				inspectLabel.text = "Talk to " + hover_collider.characterName
+				
+				#animate hovered object label text
+				if inspectLabel.visible_ratio <= 1.0:
+					inspectLabel.visible_ratio += 0.2
+				
+			else:
+				inspectLabel.text = ""
+				inspectLabel.visible_ratio = 0
+			
+	else: #when not colliding
+		hover_collider = null
+		inspectLabel.text = ""
+		inspectLabel.visible_ratio = 0
+	
+
+#dialogue functions
+func toggle_dialogue_on(dialogueResource: Resource):
+	print("Dialogue on")
+	
+	isTalking = true
+	release_mouse()
+	can_move = false
+	can_look = false
+	
+func toggle_dialogue_off(dialogueResource: Resource):
+	print("Dialogue off")
+	
+	isTalking = false
+	capture_mouse()
+	can_move = true
+	can_look = true
+	
 
 
+			
 ## Rotate us to look around.
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).
 ## Modifies look_rotation based on rot_input, then resets basis and rotates by look_rotation.
@@ -138,7 +218,6 @@ func enable_freefly():
 func disable_freefly():
 	collider.disabled = false
 	freeflying = false
-
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

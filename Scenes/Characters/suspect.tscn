@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvqqgp2v425eq"]
+
+[ext_resource type="Script" uid="uid://dl8de31a7odyu" path="res://Scripts/Characters/suspect.gd" id="1_jwb6t"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_jwb6t"]
+size = Vector2(1.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gqvx"]
+transparency = 2
+alpha_scissor_threshold = 0.382
+alpha_antialiasing_mode = 0
+shading_mode = 0
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_clma5"]
+height = 1.0
+radius = 0.3
+
+[node name="Suspect" type="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_jwb6t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_jwb6t")
+surface_material_override/0 = SubResource("StandardMaterial3D_0gqvx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_clma5")
