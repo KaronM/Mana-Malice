@@ -1,0 +1,3 @@
+0, "Luther", 75, 20, 0, 0, "He is a bit arrogant and dismissive but hides it well;he has a temper"
+1, "Zenith", 30, 30, 0, 0, "Enigmatic and overly helpful, but a bit nervous;he is prone to rambling. he knows of luthers temper" 
+2, "Selene", 40, 70, 0, 0, "Very anxious and precise;however, she is Frustrated at the current state of affairs"
