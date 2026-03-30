@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj3bbf0obgmel"]
+[gd_scene load_steps=7 format=3 uid="uid://cj3bbf0obgmel"]
+
+[ext_resource type="Script" uid="uid://d1m377olcvry0" path="res://Scenes/Dialogue/Balloons/text_balloon.gd" id="1_06yig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -60,15 +62,18 @@ MarginContainer/constants/margin_top = 15
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
 
 [node name="TextBalloon" type="CanvasLayer"]
+script = ExtResource("1_06yig")
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 15
+anchor_top = 0.627
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -0.296021
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = SubResource("Theme_cniri")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon"]
@@ -114,9 +119,16 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 placeholder_text = "Text Here"
 context_menu_enabled = false
 emoji_menu_enabled = false
 shortcut_keys_enabled = false
 wrap_mode = 1
 scroll_smooth = true
+
+[node name="Label" type="Label" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/50 Characters Left"
+horizontal_alignment = 1

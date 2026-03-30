@@ -17,6 +17,8 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+BetterHttp="*res://addons/better_http/better_http.gd"
+ResponseHandler="*res://Scripts/ResponseHandler.gd"
 
 [dialogue_manager]
 
@@ -28,7 +30,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/py4godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/better_http/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0pekwg2gsr5p" path="res://Assets/Furniture/sconce_scene.blend" id="4_7hov7"]
 [ext_resource type="PackedScene" uid="uid://bmlsab3s5a5e2" path="res://Scenes/Entities/character.tscn" id="5_g72qw"]
 [ext_resource type="Resource" uid="uid://cfvgmaq6glihv" path="res://Scenes/Dialogue/Vane.dialogue" id="6_0f3se"]
-[ext_resource type="Texture2D" uid="uid://b386sq7v2c7x5" path="res://Assets/Characters/Placeholders/CharacterPlaceholder-Picsart-BackgroundRemover.png" id="6_qrcw0"]
+[ext_resource type="Texture2D" uid="uid://b386sq7v2c7x5" path="res://Assets/Characters/Placeholders/CharacterPlaceholder.png" id="6_qrcw0"]
 
 [sub_resource type="Environment" id="Environment_jjgbg"]
 background_energy_multiplier = 0.83

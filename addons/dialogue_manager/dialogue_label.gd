@@ -1,6 +1,5 @@
 @icon("./assets/icon.svg")
 
-@tool
 
 ## A RichTextLabel specifically for use with [b]Dialogue Manager[/b] dialogue.
 class_name DialogueLabel extends RichTextLabel
@@ -26,7 +25,7 @@ signal paused_typing(duration: float)
 @export var skip_action: StringName = &"ui_cancel"
 
 ## The speed with which the text types out.
-@export var seconds_per_step: float = 0.02
+@export var seconds_per_step: float = 0.01
 
 ## Automatically have a brief pause when these characters are encountered.
 @export var pause_at_characters: String = ".?!"

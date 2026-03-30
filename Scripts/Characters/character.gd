@@ -1,6 +1,7 @@
 class_name Character
 extends Node3D
 
+
 @export var characterPNG: Texture2D
 @export var characterName:String
 @export var dialogueResource: Resource

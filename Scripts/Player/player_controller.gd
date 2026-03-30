@@ -57,8 +57,6 @@ var freeflying : bool = false
 @onready var reticle: TextureRect = $Reticle
 @onready var inspectLabel : Label = $Label
 
-
-
 #for dialogue
 var isTalking : bool = false
 var isTyping : bool = false
@@ -69,8 +67,10 @@ func _ready() -> void:
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 	#connect dialogue ending to function
-	Engine.get_singleton("DialogueManager").dialogue_started.connect(toggle_dialogue_on)
-	Engine.get_singleton("DialogueManager").dialogue_ended.connect(toggle_dialogue_off)
+	DialogueManager.dialogue_started.connect(toggle_dialogue_on)
+	DialogueManager.dialogue_ended.connect(toggle_dialogue_off)
+	
+	
 
 func _input(event: InputEvent) -> void:
 	# Mouse capturing
@@ -145,7 +145,11 @@ func activate():
 			if hit.dialogueResource == null:
 				push_error("Missing dialogue resource on: " + hit.name)
 				return
-			DialogueManager.show_dialogue_balloon(hit.dialogueResource, "start")
+			var balloon = DialogueManager.show_dialogue_balloon(hit.dialogueResource, "start")
+			await balloon.ready
+			balloon.dialogue_label.seconds_per_step = 0.7
+			balloon.dialogue_label.next_action = null
+			balloon.dialogue_label.skip_action = null
 			hit.interact()
 
 #when hovering over an object

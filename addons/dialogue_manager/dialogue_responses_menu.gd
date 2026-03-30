@@ -3,13 +3,11 @@
 ## A [Container] for dialogue responses provided by [b]Dialogue Manager[/b].
 class_name DialogueResponsesMenu extends Container
 
-
 ## Emitted when a response is focused.
 signal response_focused(response: Control)
 
 ## Emitted when a response is selected.
 signal response_selected(response: Control)
-
 
 ## Optionally specify a control to duplicate for each response
 @export var response_template: Control
@@ -36,7 +34,6 @@ var responses: Array = []:
 
 # The previously focused item in this menu.
 var _previously_focused_item: Control = null
-
 
 func _ready() -> void:
 	visibility_changed.connect(func():
