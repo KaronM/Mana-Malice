@@ -1,3 +1,13 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
+# Godot
+Godot/
+Godot/.godot/
+
+# Python
+Backend/.venv/
+Backend/__pycache__/
+Backend/.env
+Backend/**/__pycache__/
+**/*.pyc
+
+# General
+.DS_Store

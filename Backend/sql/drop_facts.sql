@@ -1,0 +1,1 @@
+DROP TABLE Facts CASCADE

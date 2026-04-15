@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+openai
+logfire
+pydantic_ai
+pydantic
+pathlib
+python-dotenv
+psycopg2
+psycopg2-pool
+psycopg2-binary
