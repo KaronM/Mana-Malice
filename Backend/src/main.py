@@ -7,6 +7,7 @@ from rag import run_agent
 import psycopg2
 from psycopg2 import pool
 from contextlib import asynccontextmanager
+from knn import getMood
 import classes
 
 env_path = Path(__file__).parent.parent / ".env"
@@ -57,7 +58,6 @@ async def get_ac_stats(suspect_id: int):
     finally:
         postgresql_pool.putconn(conn)
 
-
 @app.post("/Interrogation/{suspect_id}")
 async def create_suspect(IRequest: classes.InterrogationRequest):
     print("Connection Started!")
@@ -79,7 +79,9 @@ async def create_suspect(IRequest: classes.InterrogationRequest):
 
         response = await run_agent(suspect_object, IRequest)
 
-        return response
+        response["mood"] = getMood(response["updated aggression"], response["updated compliance"])
+
+        return response 
     
     except Exception as e:
         print("Connection Failed: ", e)

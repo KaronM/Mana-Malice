@@ -225,21 +225,21 @@ async def create_thoth_comment(comment:str):
 async def update_suspect_status(
     ctx: RunContext[classes.Suspect], 
     aggression_delta: int, 
-    compliance_delta: int, 
-    reason: str
+    compliance_delta: int
 ):
     """
     call this tool to adjust the suspect's internal state based on the conversation.
     - aggression_delta: change in anger/defensiveness (-20 to 20).
     - compliance_delta: change in willingness to help (-20 to 20).
     - reason: short explanation (ex. 'Player was insulting' or 'Player showed empathy').
+    Have more drastic changes if you have an aggressive or volatile personality.
     """
     a = ctx.deps.ac_stats[0]
     a += aggression_delta
     c = ctx.deps.ac_stats[1]
     c += compliance_delta
     
-    print(f"Status Update: {reason}. Agg: {a}, Comp: {c}")
+    print(f"Status Update: Agg: {a}, Comp: {c}")
     return c
 
 @agent.tool
