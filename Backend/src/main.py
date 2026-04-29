@@ -51,12 +51,16 @@ async def get_ac_stats(suspect_id: int):
         cur = conn.cursor()
         cur.execute('SELECT base_aggression,base_compliance FROM suspect WHERE id = %s', (suspect_id,))
         
-        return cur.fetchone()
+        acStats = cur.fetchone()
     
+        mood = getMood(acStats[0], acStats[1])
+
+        return {acStats[0], acStats[1], mood}
     except Exception as e:
         print("stat collection Failed: ", e)
     finally:
         postgresql_pool.putconn(conn)
+
 
 @app.post("/Interrogation/{suspect_id}")
 async def create_suspect(IRequest: classes.InterrogationRequest):
@@ -73,7 +77,7 @@ async def create_suspect(IRequest: classes.InterrogationRequest):
 
         guiltiness = suspect[5]
 
-        suspect_object = classes.Suspect(suspect_id=IRequest.suspect_id, name=suspect_name, db_conn=conn, ac_stats=ac, is_guilty=guiltiness,personality = suspect_personality, current_focus=IRequest.current_focus)
+        suspect_object = classes.Suspect(suspect_id=IRequest.suspect_id, name=suspect_name, db_conn=conn, ac_stats=ac, is_guilty=guiltiness,personality = suspect_personality, current_focus=IRequest.current_focus, questions_asked=IRequest.questionsAsked, current_mood=IRequest.current_mood)
         
         print("suspect info: ", suspect)
 

@@ -10,13 +10,16 @@ import logfire
 from pydantic_ai import Agent, RunContext #for interacting with a LLM agent for the necessary responses
 from pydantic_ai.models.openai import OpenAIResponsesModel
 
+questionLimit = 20
+
+logfire.configure()
+
 env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 db_pass = os.getenv("DB_PASS")
 
 model = OpenAIResponsesModel("gpt-4o-mini")
-
 
 #creating our AI agent
 agent = Agent(model,
@@ -77,16 +80,16 @@ def search_knowledge(conn: psycopg2.extensions.connection, suspect_id, fact_id):
         print("Knowledge Search Finished!")
 
 def search_observations(conn: psycopg2.extensions.connection, suspect_id, observation_keyword):
-    print("Knowledge Search Started!")
+    print("Observation Search Started!")
     try:
         cur = conn.cursor()
-        cur.execute('''SELECT content FROM suspect_observation WHERE content LIKE '%s' ''', (suspect_id, observation_keyword))
+        cur.execute('''SELECT content FROM suspect_observation WHERE suspect_id = '%s' AND content LIKE '%s' ''', (suspect_id, observation_keyword))
         return cur.fetchone
 
     except Exception as e:
-        print("Knowledge search failed:" ,e)
+        print("Observation search failed:" ,e)
     finally:
-        print("Knowledge Search Finished!")
+        print("Observation Search Finished!")
 
 #adds (suspect_id, fact_id) in suspect_facts if suspect doesn't know 
 def add_observation(conn: psycopg2.extensions.connection, suspect_id, content):
@@ -131,6 +134,8 @@ async def get_system_prompt(ctx: RunContext[classes.Suspect]):
             Your guilty status is {ctx.deps.is_guilty}.
             Mood: Your aggression level is {ctx.deps.ac_stats[0]}, and your compliance level is {ctx.deps.ac_stats[1]}
             Your personality is {ctx.deps.personality}
+            Your current mood is {ctx.deps.current_mood}
+            You were asked {ctx.deps.questions_asked} questions
             RULES:
             1. If the player asks a question, use 'recall_and_verify' immediately.
             2. If a fact is NOT known by you, you must act as if it is news to you. If you are guilty, you should Lie
@@ -138,6 +143,8 @@ async def get_system_prompt(ctx: RunContext[classes.Suspect]):
             4. Use evaluate_confession_criteria to see if the mood level dictates a confession
             5. ALWAYS run update_focus to see if the request is Relevant, If the request is Irrelevant, skip all steps and dismiss the request
             6. NEVER send an empty response or non-response. If so, use ... as a response.
+            7. If you decide to lie, ALWAYS store the lie as a suspect observation to refer to it later.
+            8. If asked over {questionLimit} questions, you can choose to leave the interrogation.
             """
             '''
 
@@ -196,6 +203,7 @@ async def memory_search(ctx: RunContext[classes.Suspect], query: str, limit: int
 async def add_suspect_observation(ctx: RunContext[classes.Suspect], content: str):
     '''
     use this tool to ALWAYS add observations from the interrogator's request with info that 
+    Also always use this tool to store lies to refer to later on
     you'll most likely need to remember in the interrogation.
     Use this for things like the interrogators name and other basic information
     '''
@@ -204,7 +212,8 @@ async def add_suspect_observation(ctx: RunContext[classes.Suspect], content: str
 @agent.tool
 async def search_suspect_observation(ctx: RunContext[classes.Suspect], content: str):
     '''
-    use this tool to ALWAYS add observations from the interrogator's request with info that 
+    use this tool to ALWAYS add observations from the interrogator's request with info that
+    use this tool to search through lies also 
     you'll most likely need to remember in the interrogation.
     Use this for things like the interrogators name and other basic information
     '''
@@ -217,6 +226,7 @@ async def create_thoth_comment(comment:str):
     GENERATE a short comment guiding the interrogator
     ONLY use this if the request is deemed irrelevant
     DO NOT use this for every response
+    Don't use this when choosing to leave interrogation
     '''
 
     return f"thoth says {comment}"
@@ -272,7 +282,7 @@ async def run_agent(suspect: classes.Suspect, IRequest: classes.InterrogationReq
 
     response = result.output
 
-    #for testing purposes -> logfire.info(f'Here is the output: {response}')
+    logfire.info(f'Here is the output: {response}')
 
     dict = {'output': response.dialogue, 
             'updated aggression': response.updated_aggression,

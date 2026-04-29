@@ -13,6 +13,9 @@ class Suspect():
     is_guilty : bool
     personality: str
     current_focus: int
+    questions_asked: int
+    current_mood: str
+
 
 #json data schemas for interrogation models responses and requests
 class InterrogationRequest(BaseModel):
@@ -22,6 +25,7 @@ class InterrogationRequest(BaseModel):
     compliance: float
     current_focus: int
     questionsAsked : int
+    current_mood : str
  #current_focus: int 
 
 class InterrogationResponse(BaseModel):
