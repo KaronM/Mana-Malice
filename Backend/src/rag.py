@@ -10,7 +10,7 @@ import logfire
 from pydantic_ai import Agent, RunContext #for interacting with a LLM agent for the necessary responses
 from pydantic_ai.models.openai import OpenAIResponsesModel
 
-questionLimit = 20
+questionLimit = 15
 
 logfire.configure()
 
@@ -132,18 +132,20 @@ async def get_system_prompt(ctx: RunContext[classes.Suspect]):
     return f'''
             You are {ctx.deps.name}, a suspect in a petrification murder.
             Your guilty status is {ctx.deps.is_guilty}.
-            Mood: Your aggression level is {ctx.deps.ac_stats[0]}, and your compliance level is {ctx.deps.ac_stats[1]}
             Your personality is {ctx.deps.personality}
             Your current mood is {ctx.deps.current_mood}
-            You were asked {ctx.deps.questions_asked} questions
+            You were asked {ctx.deps.questions_asked} questions.
+            The interrogator was unfocused {ctx.deps.unfocused_streak} times.
+            You talk like this {ctx.deps.speech_pattern}
+
             RULES:
             1. If the player asks a question, use 'recall_and_verify' immediately.
             2. If a fact is NOT known by you, you must act as if it is news to you. If you are guilty, you should Lie
-            3. Use 'update_suspect_status' if the player's tone changes.
-            4. Use evaluate_confession_criteria to see if the mood level dictates a confession
-            5. ALWAYS run update_focus to see if the request is Relevant, If the request is Irrelevant, skip all steps and dismiss the request
-            6. NEVER send an empty response or non-response. If so, use ... as a response.
-            7. If you decide to lie, ALWAYS store the lie as a suspect observation to refer to it later.
+            3. Use evaluate_confession_criteria to see if the mood level dictates a confession
+            4. ALWAYS run update_focus to see if the request is Relevant, If the request is Irrelevant, skip all steps and dismiss the request
+            5. NEVER send an empty response or non-response. If so, use ... as a response.
+            6. If you decide to lie, ALWAYS store the lie as a suspect observation to refer to it later.
+            7. ONLY If {ctx.deps.unfocused_streak} is atleast 3, Automatically leave the interrogation and generate a response that describes the interrogator of being nonsensical.
             8. If asked over {questionLimit} questions, you can choose to leave the interrogation.
             """
             '''
@@ -152,7 +154,7 @@ async def get_system_prompt(ctx: RunContext[classes.Suspect]):
 async def update_focus(ctx: RunContext[classes.Suspect], focus_delta: int):
     '''
     ALWAYS use this tool to quantify the relevancy of the interrogator's request
-    create a focus_delta: -2 if completely irrelevant, 1 if relevant 
+    create a focus_delta: -2 if asked irrelevant information to the case, 1 if relevant 
     Maximum focus is 8, minimum is 0
     '''
 
@@ -162,12 +164,13 @@ async def update_focus(ctx: RunContext[classes.Suspect], focus_delta: int):
 
 
 @agent.tool
-async def memory_search(ctx: RunContext[classes.Suspect], query: str, limit: int ):
+async def memory_search(ctx: RunContext[classes.Suspect], query: str, limit: int, is_evidence_asked: bool ):
     '''
     A large memory search. Automatically checks if the suspect 
     knows the facts and if those facts are linked to physical evidence.
     if suspect does not know the number 1 fact, use the add_suspect_knowledge for the fact.
     Then use the update_aggression_compliance from the following.
+    if evidence asked
     Pick the number of memories as the Limit necessary to search. 3 maximum, 1 minimum.
     Less memories should be searched when minimal information is provided.
     '''
@@ -183,12 +186,13 @@ async def memory_search(ctx: RunContext[classes.Suspect], query: str, limit: int
             is_known = search_knowledge(ctx.deps.db_conn, ctx.deps.suspect_id, f_id)
             
             #is there physical evidence attached to it?
-            evidence_id = search_evidence_from_fact(ctx.deps.db_conn, f_id)
+            if is_evidence_asked:
+                evidence_id = search_evidence_from_fact(ctx.deps.db_conn, f_id)
+                verified_results.append({"associated_evidence": evidence_id if len(evidence_id) != 0 else "None"})
             
             verified_results.append({
                 "fact": content,
                 "known_by_suspect": is_known != -1,
-                "associated_evidence": evidence_id if len(evidence_id) != 0 else "None"
             })
     except Exception as e:
         print("Memory Search Failed: ", e)
@@ -242,10 +246,9 @@ async def update_suspect_status(
     - aggression_delta: change in anger/defensiveness (-20 to 20).
     - compliance_delta: change in willingness to help (-20 to 20).
     - reason: short explanation (ex. 'Player was insulting' or 'Player showed empathy').
-    Have more drastic changes if you have an aggressive or volatile personality.
     """
-    a = ctx.deps.ac_stats[0]
-    a += aggression_delta
+    a = ctx.deps.ac_stats[0] * (1-ctx.deps.stubborness)
+    a += aggression_delta * (1-ctx.deps.stubborness)
     c = ctx.deps.ac_stats[1]
     c += compliance_delta
     

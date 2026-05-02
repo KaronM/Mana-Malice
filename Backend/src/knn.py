@@ -7,7 +7,7 @@ centroids = [
 ]
 
 classes = [
-           "Compliant", "Nervous", "Volatile",
+           "Compliant", "Nervous", "Desperate",
            "Calm", "Guarded", "Hostile",
            "Distant", "Defiant", "Explosive",
 ]
