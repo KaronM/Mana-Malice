@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvqqgp2v425eq"]
+
+[ext_resource type="Script" uid="uid://dl8de31a7odyu" path="res://Scripts/Characters/suspect.gd" id="1_jwb6t"]
+[ext_resource type="Texture2D" uid="uid://fu6qy1tt5wfn" path="res://Assets/Icons/Chat_Bubble_1-removebg-preview.png" id="2_4ru5r"]
+[ext_resource type="Texture2D" uid="uid://764ydnwcaxei" path="res://Assets/Icons/Chat_Bubble_2-removebg-preview.png" id="3_getdj"]
+[ext_resource type="Texture2D" uid="uid://cnocw2st4e07y" path="res://Assets/Icons/Chat_Bubble_3-removebg-preview.png" id="4_wq2di"]
+[ext_resource type="Texture2D" uid="uid://b6wbeayyf0pch" path="res://Assets/Icons/Chat_Bubble_4-removebg-preview.png" id="5_1v37g"]
+[ext_resource type="Texture2D" uid="uid://bjq3orga3l02h" path="res://Assets/Icons/Emojis/Calm.png" id="6_wq2di"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_jwb6t"]
+size = Vector2(1.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gqvx"]
+transparency = 2
+alpha_scissor_threshold = 0.382
+alpha_antialiasing_mode = 0
+shading_mode = 0
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_clma5"]
+height = 1.0
+radius = 0.3
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3rn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ru5r")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ru5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_getdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wq2di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1v37g")
+}],
+"loop": true,
+"name": &"TurningOn",
+"speed": 5.0
+}]
+
+[node name="Suspect" type="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_jwb6t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_jwb6t")
+surface_material_override/0 = SubResource("StandardMaterial3D_0gqvx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_clma5")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.175855, 0.208025, 0.0637405)
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34962, 2.64033, 0)
+sprite_frames = SubResource("SpriteFrames_c3rn3")
+animation = &"TurningOn"
+autoplay = "Off"
+frame = 3
+frame_progress = 0.851614
+
+[node name="Mood" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6129, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Mood"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.0711672, 0)
+texture = ExtResource("6_wq2di")

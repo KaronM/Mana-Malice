@@ -1,0 +1,25 @@
+~ start
+??: Hey there, Nice to meet you! Welcome to the Magisterium police station of Magic Affairs, My name is Vane. 
+
+- Hi there sir!
+- What a pleasure to meet you!
+
+Vane: I heard you've came from the country side. You're a graduate at the top Magic academy right?
+
+- Yes sir!
+	Vane: No need for the formalities.
+- Absolutely!
+	Vane: Love the enthusiasm!
+
+Vane: Well, Let's cut to the chase... We got a call from [b][color=yellow]Nightshade Academy[/color][/b] about a magic related Incident, specifically alchemy.
+
+Vane: I know you're currently still moving in so we've sent other detectives to the scene of the crime, however, I want you to go there soon to meet with the rest of them.
+
+-I will do so sir!
+
+Vane: I will accompany you and guide you on this crime since this is your first one but I expect great things from a top grad such as yourself.
+
+Vane: [b]Now let's leave![/b]
+=> END
+
+~ interrogation

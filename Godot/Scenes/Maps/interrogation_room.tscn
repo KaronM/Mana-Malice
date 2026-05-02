@@ -1,0 +1,516 @@
+[gd_scene load_steps=26 format=3 uid="uid://7kgmuvrwaqom"]
+
+[ext_resource type="Script" uid="uid://by6h6sdj5efix" path="res://Scripts/interrogation_room.gd" id="1_gjh31"]
+[ext_resource type="PackedScene" uid="uid://clqf1xxotydua" path="res://Assets/Furniture/Newest_coffee_table.tscn" id="2_xcwl6"]
+[ext_resource type="PackedScene" uid="uid://cvqqgp2v425eq" path="res://Scenes/Entities/suspect.tscn" id="3_eo4eq"]
+[ext_resource type="PackedScene" uid="uid://caooys10ot5di" path="res://Assets/Furniture/New_Sconce.tscn" id="3_xcwl6"]
+[ext_resource type="PackedScene" uid="uid://d1oyesd6ixbun" path="res://Scenes/Player/player_camera.tscn" id="5_gjh31"]
+[ext_resource type="Texture2D" uid="uid://dvnpy2gqghqed" path="res://Assets/textures/output-onlinepngtools (1).png" id="6_53g66"]
+[ext_resource type="Script" uid="uid://e5dg7ywsdn4n" path="res://Scripts/http_request_handler.gd" id="6_kggk2"]
+[ext_resource type="Texture2D" uid="uid://c7ux2gkja0fig" path="res://Assets/textures/WhiteCard.png" id="7_53g66"]
+[ext_resource type="PackedScene" uid="uid://7lxtqfro1agp" path="res://Scenes/Dialogue/Balloons/CharacterBalloon.tscn" id="7_77unc"]
+[ext_resource type="PackedScene" uid="uid://cj3bbf0obgmel" path="res://Scenes/Dialogue/Balloons/text_balloon.tscn" id="7_lekog"]
+[ext_resource type="Texture2D" uid="uid://27jfy3ka8en7" path="res://Assets/textures/blackpaintsmear.png" id="8_1dapd"]
+[ext_resource type="Shader" uid="uid://cfmxb2uwlqons" path="res://Scenes/Maps/interrogation_room_blur.gdshader" id="8_3sx06"]
+[ext_resource type="Shader" uid="uid://bkafeyvad534d" path="res://Scenes/Maps/vignette.gdshader" id="8_em5y8"]
+[ext_resource type="Texture2D" uid="uid://benaugp264xk8" path="res://Assets/Icons/chevron-right-icon.png" id="9_27i8g"]
+[ext_resource type="FontFile" uid="uid://de4xn2kkpe1y1" path="res://Assets/Fonts/diffusion-bold.ttf" id="9_jyb6m"]
+[ext_resource type="Script" uid="uid://d0lyirniwpsuw" path="res://Scenes/Maps/menu_texture_button.gd" id="9_p00rg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntajy"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(0, 0.2334, 0.233602, 1)
+rim = 0.0
+rim_tint = 0.24
+refraction_enabled = true
+refraction_scale = 0.25
+refraction_texture_channel = 2
+
+[sub_resource type="Environment" id="Environment_53g66"]
+background_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcwl6"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.819608)
+emission_enabled = true
+emission = Color(0.705365, 0.705442, 0.732056, 1)
+emission_energy_multiplier = 0.5
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_x17ea"]
+material = SubResource("StandardMaterial3D_xcwl6")
+radius = 0.025
+height = 0.025
+
+[sub_resource type="Gradient" id="Gradient_1dapd"]
+offsets = PackedFloat32Array(0, 0.00568182, 0.0340909, 0.0511364, 0.0681818, 0.698864, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.590909, 0.590909, 0.590909, 1, 0.937108, 0.937108, 0.937108, 1, 0.759358, 0.759358, 0.759358, 1, 0.82, 0.82, 0.82, 1, 0.91439, 0.91439, 0.91439, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jyb6m"]
+gradient = SubResource("Gradient_1dapd")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_p00rg"]
+diffuse_texture = ExtResource("8_1dapd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_em5y8"]
+shader = ExtResource("8_3sx06")
+shader_parameter/blur_amount = 6.958
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dapd"]
+shader = ExtResource("8_em5y8")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.7
+shader_parameter/outer_radius = 1.25
+
+[node name="InterrogationRoom" type="Node3D"]
+script = ExtResource("1_gjh31")
+
+[node name="Main" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.65, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.7)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, 4.9)
+calculate_tangents = false
+
+[node name="Wall4" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+
+[node name="WindowOpening1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+operation = 2
+calculate_tangents = false
+
+[node name="Window1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.04, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+material = SubResource("StandardMaterial3D_ntajy")
+
+[node name="Wall2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, 9.07692, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="Wall3" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, -9.38461, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="Floor" type="CSGBox3D" parent="Main"]
+transform = Transform3D(20.7413, 0, 0, 0, 0.211449, 0, 0, 0, 11.5788, -0.111961, -1.3712, -1.09611)
+use_collision = true
+
+[node name="Ceiling" type="CSGBox3D" parent="Main"]
+transform = Transform3D(20.7413, 0, 0, 0, 0.211449, 0, 0, 0, 11.5788, -0.111961, 3.15237, -1.09611)
+use_collision = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_53g66")
+
+[node name="Furniture" type="Node" parent="."]
+
+[node name="Coffee_table" parent="Furniture" instance=ExtResource("2_xcwl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24958, 0.394664, -1.24391)
+
+[node name="Sconce" parent="Furniture" instance=ExtResource("3_xcwl6")]
+transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, -5.11198, 1.93997, -6.40025)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Furniture/Sconce"]
+transform = Transform3D(0.983583, 0, -0.180468, 0, 1, 0, 0.180468, 0, 0.983583, 0.00860548, 0.116095, -0.0641674)
+amount = 10
+lifetime = 1.04
+explosiveness = 0.1
+mesh = SubResource("SphereMesh_x17ea")
+spread = 107.95
+gravity = Vector3(0, -3, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Furniture/Sconce"]
+transform = Transform3D(0.245895, 0, -0.0451169, 0, 0.25, 0, 0.0451169, 0, 0.245895, 0.0255748, 0.0817464, -0.0385343)
+light_energy = 0.2
+omni_range = 2.441
+omni_attenuation = 0.11
+
+[node name="Sconce2" parent="Furniture" instance=ExtResource("3_xcwl6")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5.11198, 1.93997, 4.10043)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Furniture/Sconce2"]
+transform = Transform3D(0.983583, 0, -0.180468, 0, 1, 0, 0.180468, 0, 0.983583, -0.0170254, 0.116095, -0.0662348)
+amount = 10
+lifetime = 1.04
+explosiveness = 0.1
+mesh = SubResource("SphereMesh_x17ea")
+spread = 107.95
+gravity = Vector3(0, -3, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Furniture/Sconce2"]
+transform = Transform3D(0.245895, 0, -0.0451169, 0, 0.25, 0, 0.0451169, 0, 0.245895, 0.0255748, 0.0817464, -0.0385343)
+light_energy = 0.2
+omni_range = 2.441
+omni_attenuation = 0.11
+
+[node name="Suspect" parent="." instance=ExtResource("3_eo4eq")]
+transform = Transform3D(0.0472557, 0, -1.34917, 0, 1.35, 0, 1.34917, 0, 0.0472557, -0.854213, 1.6952, -1.52106)
+
+[node name="PlayerCamera" parent="." instance=ExtResource("5_gjh31")]
+transform = Transform3D(0.0127406, 0, 0.999919, 0, 1, 0, -0.999919, 0, 0.0127406, 1.15802, 1.32996, -1.71937)
+script = null
+
+[node name="HTTPRequestHandler" type="Node" parent="."]
+script = ExtResource("6_kggk2")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HTTPRequestHandler"]
+timeout = 25.0
+
+[node name="Menu" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MenuSelection" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MenuSelection"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -656.0
+offset_bottom = -6.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="TextureRect" parent="Menu/MenuSelection/VBoxContainer"]
+modulate = Color(0.847, 0.861878, 0.839677, 1)
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("6_53g66")
+
+[node name="ColorRect" type="TextureRect" parent="Menu/MenuSelection/VBoxContainer/ColorRect"]
+z_index = -1
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -147.0
+offset_top = -83.0
+offset_right = -49.0
+offset_bottom = 67.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_53g66")
+
+[node name="TextureButton" type="TextureButton" parent="Menu/MenuSelection/VBoxContainer/ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -39.0001
+offset_right = 537.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(0.08, 0.1)
+size_flags_horizontal = 4
+size_flags_vertical = 10
+toggle_mode = true
+texture_normal = ExtResource("9_27i8g")
+texture_hover = SubResource("GradientTexture1D_jyb6m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MenuSelection/VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -399.0
+offset_top = -152.0
+offset_right = 426.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SuspectBackgroundButton" type="TextureButton" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+texture_hover = SubResource("CanvasTexture_p00rg")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("9_p00rg")
+
+[node name="Label" type="Label" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer/SuspectBackgroundButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_jyb6m")
+theme_override_font_sizes/font_size = 22
+text = "Suspect Background"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="EvidenceButton" type="TextureButton" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_hover = SubResource("CanvasTexture_p00rg")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("9_p00rg")
+
+[node name="Label" type="Label" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer2/EvidenceButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_jyb6m")
+theme_override_font_sizes/font_size = 22
+text = "Evidence"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NotesButton" type="TextureButton" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_hover = SubResource("CanvasTexture_p00rg")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("9_p00rg")
+
+[node name="Label" type="Label" parent="Menu/MenuSelection/VBoxContainer/ColorRect/HBoxContainer/MarginContainer3/NotesButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_jyb6m")
+theme_override_font_sizes/font_size = 22
+text = "Crime Scene Photos"
+
+[node name="QuestionsAsked" type="Label" parent="Menu/MenuSelection/VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -66.0
+offset_right = 102.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "0/20  responses Left"
+
+[node name="Layer1" type="TextureRect" parent="Menu/MenuSelection/VBoxContainer/ColorRect"]
+modulate = Color(0.888425, 0.888425, 0.888425, 1)
+z_index = -2
+layout_mode = 0
+offset_left = 9.0
+offset_top = 10.0
+offset_right = 963.0
+offset_bottom = 660.0
+rotation = 0.02386
+scale = Vector2(1.19911, 1)
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("6_53g66")
+
+[node name="BlurOverlay" type="ColorRect" parent="Menu/MenuSelection"]
+material = SubResource("ShaderMaterial_em5y8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScrollDestination" type="Node2D" parent="Menu/MenuSelection"]
+position = Vector2(566, 137)
+scale = Vector2(-8348.91, 5403.67)
+
+[node name="ScrollStart" type="Node2D" parent="Menu/MenuSelection"]
+position = Vector2(566, 637)
+scale = Vector2(-8348.91, 5403.67)
+
+[node name="SuspectRect" type="ColorRect" parent="Menu/MenuSelection"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0.460347, 0.460347, 0.460347, 1)
+
+[node name="SuspectSelection" type="VBoxContainer" parent="Menu/MenuSelection/SuspectRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -213.5
+offset_right = 300.0
+offset_bottom = 213.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/MenuSelection/SuspectRect/SuspectSelection"]
+layout_mode = 2
+text = "Which Suspect Do you want to Interrogate First?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MenuSelection/SuspectRect/SuspectSelection"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="LutherBox" type="VBoxContainer" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/LutherBox"]
+layout_mode = 2
+text = "Luther"
+
+[node name="SeleneBox" type="VBoxContainer" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/SeleneBox"]
+layout_mode = 2
+text = "Selene"
+
+[node name="ZenithBox" type="VBoxContainer" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/ZenithBox"]
+layout_mode = 2
+text = "Zenith"
+
+[node name="InterrogationEndRect" type="ColorRect" parent="Menu/MenuSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.205117, 0.205117, 0.205117, 1)
+
+[node name="Label" type="Label" parent="Menu/MenuSelection/InterrogationEndRect"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 248.0
+offset_right = 747.0
+offset_bottom = 271.0
+text = "Your Suspect has left the Interrogation..."
+
+[node name="Vignette" type="ColorRect" parent="Menu/MenuSelection"]
+top_level = true
+z_as_relative = false
+material = SubResource("ShaderMaterial_1dapd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Balloons" type="Node" parent="."]
+
+[node name="DialogueBalloon" parent="Balloons" instance=ExtResource("7_77unc")]
+skip_action = &""
+
+[node name="TextBalloon" parent="Balloons" instance=ExtResource("7_lekog")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13964, 4.26619, -1.38553)
+light_energy = 10.444
+
+[connection signal="pressed" from="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/LutherBox/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/SeleneBox/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/MenuSelection/SuspectRect/SuspectSelection/HBoxContainer/ZenithBox/Button" to="." method="_on_button_pressed"]
+[connection signal="visibility_changed" from="Balloons/TextBalloon" to="Balloons/TextBalloon" method="_on_visibility_changed"]

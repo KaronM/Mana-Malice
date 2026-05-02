@@ -1,0 +1,176 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0ji33m3wogwx"]
+
+[ext_resource type="Texture2D" uid="uid://bwoymsnpbopqm" path="res://Assets/textures/graypaper.png" id="1_833dp"]
+[ext_resource type="Script" uid="uid://08n2oh5ox66a" path="res://Scripts/scroll.gd" id="2_pfaco"]
+[ext_resource type="FontFile" uid="uid://cgmkuoy76upeh" path="res://Assets/Fonts/TheHeartOfEverythingDemo-KRdD.ttf" id="3_hkudq"]
+[ext_resource type="Texture2D" uid="uid://ba4by73dprs2v" path="res://Assets/Characters/E1/Zenith/Zenith.png" id="4_pfaco"]
+
+[node name="Control" type="TextureRect"]
+modulate = Color(0.853917, 0.853917, 0.853917, 1)
+self_modulate = Color(0.587078, 0.587078, 0.587078, 1)
+anchors_preset = -1
+anchor_left = 0.317
+anchor_top = 0.062
+anchor_right = 0.74
+anchor_bottom = 1.028
+offset_left = -0.18399
+offset_top = -0.176003
+offset_right = -257.48
+offset_bottom = -278.144
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.12, 1.8)
+pivot_offset = Vector2(105.011, 6.54321)
+texture = ExtResource("1_833dp")
+script = ExtResource("2_pfaco")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 0.47169
+offset_top = 1.11111
+offset_right = 188.472
+offset_bottom = 101.111
+grow_horizontal = 2
+scale = Vector2(0.547928, 0.60149)
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_hkudq")
+theme_override_font_sizes/normal_font_size = 50
+text = "Zenith"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3/ColorRect"]
+layout_mode = 2
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("4_pfaco")
+expand_mode = 2
+flip_h = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.768
+offset_top = 30.1303
+offset_right = 172.232
+offset_bottom = 337.13
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Headers" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="OccupationLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer"]
+custom_minimum_size = Vector2(160, 20)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[color=lightblue]Occupation[/color]: 3rd year Alchemy Student"
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="AgeLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer2"]
+custom_minimum_size = Vector2(160, 20)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[color=lightblue]Age[/color]: 28"
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="BioLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer3"]
+custom_minimum_size = Vector2(225, 50)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[color=lightblue]Behavior[/color]: Talkative and calm."
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="WhereaboutsLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer4"]
+custom_minimum_size = Vector2(225, 20)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[color=lightblue]Reaction to crime[/color]: Devastation"
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="StatementsLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer5"]
+custom_minimum_size = Vector2(190, 100)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "[color=lightblue]Statement[/color]: Says he finished a Lab on friday with the victim and Luther at 7:00pm. There was an altercation between the victim and Luther regarding the lab's success. He arrived at the lab saturday morning at 7:45 for a redo."
+
+[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="RelationshipLabel" type="RichTextLabel" parent="VBoxContainer/Headers/MarginContainer6"]
+custom_minimum_size = Vector2(190, 75)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[color=lightblue]Relations[/color]: Says she has a great relationship with the Victim, Zenith, and Selene."
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,5 +1,5 @@
 
-COPY suspect (id, name, base_aggression, base_compliance, current_aggression, current_compliance, personality, is_guilty)
+COPY suspect (id, name, base_aggression, base_compliance, current_aggression, current_compliance, personality, is_guilty, speech_patterns, stubborness)
 FROM '/Users/kzminor22/Mana-Malice-clean/Godot/Episodes/E1-Petrification/suspects.txt'
 WITH (FORMAT csv, DELIMITER ',', QUOTE '"', HEADER false);
 

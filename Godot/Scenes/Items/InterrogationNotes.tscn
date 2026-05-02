@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://ir4tclc2u4a0"]
+
+[ext_resource type="Texture2D" uid="uid://sifrhkybc14j" path="res://Assets/textures/Weathered_paper.png" id="1_q6qh2"]
+[ext_resource type="Script" uid="uid://08n2oh5ox66a" path="res://Scripts/scroll.gd" id="2_pget2"]
+[ext_resource type="Texture2D" uid="uid://d0kxjnjf7bjgg" path="res://Assets/textures/swirl.png" id="3_34g3w"]
+[ext_resource type="FontFile" uid="uid://cgmkuoy76upeh" path="res://Assets/Fonts/TheHeartOfEverythingDemo-KRdD.ttf" id="4_jivvt"]
+
+[node name="Control" type="TextureRect"]
+anchors_preset = -1
+anchor_left = 0.317
+anchor_top = 0.062
+anchor_right = 0.74
+anchor_bottom = 1.028
+offset_left = -0.18399
+offset_top = -0.176003
+offset_right = -257.48
+offset_bottom = -278.144
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.12, 1.8)
+pivot_offset = Vector2(105.011, 6.54321)
+texture = ExtResource("1_q6qh2")
+script = ExtResource("2_pget2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 0.47169
+offset_top = 1.11111
+offset_right = 188.472
+offset_bottom = 101.111
+grow_horizontal = 2
+scale = Vector2(0.547928, 0.60149)
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_34g3w")
+expand_mode = 5
+stretch_mode = 4
+flip_h = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_jivvt")
+theme_override_font_sizes/normal_font_size = 50
+text = "Notes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_34g3w")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.824
+offset_top = 59.5748
+offset_right = 112.176
+offset_bottom = 309.575
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 275)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0.827451, 0.827451, 0.54902, 0.141176)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+placeholder_text = "Type Here..."
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

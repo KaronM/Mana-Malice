@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2s33iy67gjmk"]
+
+[ext_resource type="Texture2D" uid="uid://dt2hnnhttpvwo" path="res://Episodes/E1-Petrification/Crime-Scenes/LabBottomFloor.jpg" id="1_l1sec"]
+[ext_resource type="Script" uid="uid://db8yhhqm7jqom" path="res://Scenes/Items/crime_scene_photos.gd" id="2_l1sec"]
+
+[node name="Control" type="TextureRect"]
+anchors_preset = -1
+anchor_top = 0.015
+anchor_right = 0.426
+anchor_bottom = 0.568
+offset_left = -688.0
+offset_top = -0.72
+offset_right = 786.248
+offset_bottom = 1112.94
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(916.967, -11.6296)
+texture = ExtResource("1_l1sec")
+script = ExtResource("2_l1sec")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

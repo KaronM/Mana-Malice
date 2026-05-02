@@ -1,0 +1,323 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2kdm21iesedj"]
+
+[ext_resource type="Texture2D" uid="uid://bwoymsnpbopqm" path="res://Assets/textures/graypaper.png" id="1_8y8rp"]
+[ext_resource type="FontFile" uid="uid://cgmkuoy76upeh" path="res://Assets/Fonts/TheHeartOfEverythingDemo-KRdD.ttf" id="2_ahhwv"]
+[ext_resource type="Script" uid="uid://08n2oh5ox66a" path="res://Scripts/scroll.gd" id="2_g5uex"]
+[ext_resource type="Texture2D" uid="uid://d0kxjnjf7bjgg" path="res://Assets/textures/swirl.png" id="2_obj05"]
+[ext_resource type="Texture2D" uid="uid://ddowh665jo7qh" path="res://Assets/Evidence/E1/MedusaSalts.jpg" id="5_cb40r"]
+[ext_resource type="Texture2D" uid="uid://0dpf2m1tnmd5" path="res://Assets/Evidence/E1/MandrakeGlove.jpg" id="6_8y8rp"]
+[ext_resource type="Texture2D" uid="uid://cme783rxtuqxb" path="res://Assets/Evidence/E1/GoldenChalice.jpg" id="7_pkv8e"]
+[ext_resource type="Texture2D" uid="uid://ckrc6kos8vc8w" path="res://Assets/Evidence/E1/WoodenCup.jpg" id="8_k3iy5"]
+[ext_resource type="Texture2D" uid="uid://bunkvrgbipetr" path="res://Assets/Evidence/E1/WoodenMannequin.jpg" id="9_pb82r"]
+[ext_resource type="Texture2D" uid="uid://df6lt4a4rfw11" path="res://Assets/Evidence/E1/LabKey.jpg" id="10_827sl"]
+[ext_resource type="Texture2D" uid="uid://bvnfrywhopywi" path="res://Assets/Evidence/E1/ProfessorCrone.jpg" id="11_5om30"]
+[ext_resource type="Texture2D" uid="uid://bv3m1cp1g7cg1" path="res://Assets/Evidence/E1/EyeOfNewt.jpg" id="12_8y8rp"]
+
+[node name="Control" type="TextureRect"]
+modulate = Color(0.879776, 0.879776, 0.879776, 1)
+self_modulate = Color(0.693429, 0.69343, 0.693429, 1)
+anchors_preset = -1
+anchor_left = 0.317
+anchor_top = 0.062
+anchor_right = 0.74
+anchor_bottom = 1.028
+offset_left = -0.18399
+offset_top = -0.176003
+offset_right = -257.48
+offset_bottom = -278.144
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.12, 1.8)
+pivot_offset = Vector2(105.011, 6.54321)
+texture = ExtResource("1_8y8rp")
+script = ExtResource("2_g5uex")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 91.7983
+offset_top = -2.0919
+offset_right = 279.799
+offset_bottom = 97.9081
+grow_horizontal = 2
+scale = Vector2(0.304568, 0.399691)
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_obj05")
+expand_mode = 5
+stretch_mode = 4
+flip_h = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_ahhwv")
+theme_override_font_sizes/normal_font_size = 50
+text = "Evidence"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_obj05")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.56
+offset_top = -14.3141
+offset_right = 99.4398
+offset_bottom = 305.686
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Headers" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="ObjectLabel" type="Label" parent="VBoxContainer/Headers/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ahhwv")
+theme_override_font_sizes/font_size = 13
+text = "Object: "
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Headers"]
+layout_mode = 2
+
+[node name="MedusaSalts" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MedusaSalts"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MedusaSalts/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("5_cb40r")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MedusaSalts"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/MedusaSalts/MarginContainer2"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Medusa Salts: When interacted with living tissue, petrifies it temporarily. "
+autowrap_mode = 2
+
+[node name="MandrakeGlove" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MandrakeGlove"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MandrakeGlove/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("6_8y8rp")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MandrakeGlove"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/MandrakeGlove/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Piece of fabric. Has Mandrake Inc. on it"
+autowrap_mode = 2
+
+[node name="GoldenChalice" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/GoldenChalice"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GoldenChalice/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("7_pkv8e")
+expand_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/GoldenChalice"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/GoldenChalice/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "A chalice to hold potions and ingredients, makes them react quickly. Has Zenith's FingerPrints"
+autowrap_mode = 2
+
+[node name="WoodenCup" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/WoodenCup"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WoodenCup/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("8_k3iy5")
+expand_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/WoodenCup"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/WoodenCup/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Wooden Cup: has faint mana trails. Potions and ingredients leave mana on wood."
+autowrap_mode = 2
+
+[node name="WoodenMannequin" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/WoodenMannequin"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WoodenMannequin/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("9_pb82r")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/WoodenMannequin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/WoodenMannequin/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Mahogany Mannequin. Precious and New. Used to test potions"
+autowrap_mode = 2
+
+[node name="WoodenMannequin2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/WoodenMannequin2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WoodenMannequin2/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("10_827sl")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/WoodenMannequin2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/WoodenMannequin2/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Key Used to unlock and lock the Laboratory"
+autowrap_mode = 2
+
+[node name="ProfessorCrone" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ProfessorCrone"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ProfessorCrone/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("11_5om30")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ProfessorCrone"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/ProfessorCrone/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Professor Crone Petrified Body. Right Hand is carved off and left hand is pointing downstairs"
+autowrap_mode = 2
+
+[node name="NewtEyes" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/NewtEyes"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/NewtEyes/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("12_8y8rp")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/NewtEyes"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/NewtEyes/MarginContainer2"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "Jar with Eye of newt. All jars come with four eye of newt"
+autowrap_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
