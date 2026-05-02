@@ -1,0 +1,115 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1r53unhdg4ld"]
+
+[ext_resource type="PackedScene" uid="uid://cfu8m3htj0au4" path="res://Scenes/Player/player.tscn" id="1_j8kk1"]
+
+[node name="Court" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_j8kk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37485, 9.58462)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0840083, 0.996465, 0, -0.996465, -0.0840083, -0.225605, 11.8855, 2.25491)
+
+[node name="Building" type="CSGCombiner3D" parent="."]
+
+[node name="Desk1" type="CSGBox3D" parent="Building"]
+transform = Transform3D(6.37836, 0, 0, 0, 1, 0, 0, 0, 2.75419, 2.32675, 0.860157, 7.25403)
+size = Vector3(1, 0.832275, 1)
+
+[node name="Desk2" type="CSGBox3D" parent="Building"]
+transform = Transform3D(6.37836, 0, 0, 0, 1, 0, 0, 0, 2.75419, 1.95512, 0.860157, -7.39501)
+size = Vector3(1, 0.832275, 1)
+
+[node name="Stand" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(9.53271, 0, 0, 0, 5.28707, 0, 0, 0, 8.29852, -10.4094, -1.54787, 0)
+height = 2.1499
+
+[node name="Stand2" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(7.29314, 0, 0, 0, 5.28707, 0, 0, 0, 6.33589, -5.59948, -3.32194, -0.0922096)
+height = 2.1499
+
+[node name="Stand2-Carve" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(3.05722, 0, 0, 0, 5.28707, 0, 0, 0, 6.7856, -4.6073, 1.8544, -0.0922096)
+operation = 2
+height = 0.280151
+
+[node name="Stand-Carve" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(7.09225, 0, 0, 0, 5.28707, 0, 0, 0, 8.29852, -11.6692, 3.6939, 0)
+operation = 2
+radius = 0.61377
+height = 0.267883
+
+[node name="Jury-Stands" type="CSGBox3D" parent="Building"]
+transform = Transform3D(1.70103, 0, 0, 0, 1, 0, 0, 0, 27.096, 14.7715, 0.652069, 0)
+size = Vector3(2.57031, 2.30414, 1)
+
+[node name="Entry-Way" type="CSGBox3D" parent="Building"]
+transform = Transform3D(1.15358, 0, 0, 0, 2.1032, 0, 0, 0, 2.52063, 14.9723, 1.24797, 0.331013)
+operation = 2
+size = Vector3(4.0874, 1, 1.81201)
+
+[node name="Wall1" type="CSGBox3D" parent="Building"]
+transform = Transform3D(34.5664, 0, 0, 0, 34.107, 0, 0, 0, 0.324426, 3.80602, 7.03588, -14.0201)
+size = Vector3(1.22021, 0.396515, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Building"]
+transform = Transform3D(34.5664, 0, 0, 0, 34.107, 0, 0, 0, 0.324426, 3.55917, 7.03588, 13.7527)
+size = Vector3(1.20593, 0.396515, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Building"]
+transform = Transform3D(0.415662, 0, 0.324403, 0, 34.107, 0, -34.5639, 0, 0.00390123, -17.2834, 7.03588, 0.168109)
+size = Vector3(0.833496, 0.396515, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Building"]
+transform = Transform3D(0.415662, 0, 0.324403, 0, 34.107, 0, -34.5639, 0, 0.00390123, 24.5775, 7.09008, 0.0680869)
+size = Vector3(0.798584, 0.399693, 1)
+
+[node name="Doorway" type="CSGBox3D" parent="Building"]
+transform = Transform3D(1, 0, 0, 0, 6.91115, 0, 0, 0, 5.7764, 23.3526, 3.9555, 0.252876)
+size = Vector3(2.53027, 1, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building/Doorway"]
+transform = Transform3D(0.999986, 0, 0, 0, 0.914878, 0, 0, 0, 0.898177, -0.848747, -0.0540943, 0)
+operation = 2
+size = Vector3(2.00342, 1, 1)
+
+[node name="Doorway2" type="CSGBox3D" parent="Building"]
+transform = Transform3D(-0.997963, 0, 0.368539, 0, 6.91115, 0, -0.0638008, 0, -5.76463, -16.1646, 3.9555, -8.9542)
+size = Vector3(2.53027, 1, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building/Doorway2"]
+transform = Transform3D(0.999986, 0, 0, 0, 0.914878, 0, 0, 0, 0.898177, -0.848747, -0.0540943, 0)
+operation = 2
+size = Vector3(2.00342, 1, 1)
+
+[node name="CeilingRamp" type="CSGBox3D" parent="Building"]
+transform = Transform3D(6.93632, 0.739972, 0, -7.63067, 0.672638, 0, 0, 0, 27.6707, 20.8715, 13.1717, -0.0137577)
+size = Vector3(1, 6.01477, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Building"]
+transform = Transform3D(34.9922, 0, 0, 0, 0.637108, 0, 0, 0, 27.9421, 3.47088, -0.0247822, 0.0266418)
+use_collision = true
+size = Vector3(1.19873, 1, 1)
+
+[node name="Ceiling" type="CSGBox3D" parent="Building"]
+transform = Transform3D(34.9922, 0, 0, 0, 0.637108, 0, 0, 0, 27.9421, 3.47088, 14.941, 0.0266418)
+use_collision = true
+size = Vector3(1.19873, 1, 1)
+
+[node name="Column1" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(2.4111, 0, 0, 0, 6.18191, 0, 0, 0, 2.4111, 8.85935, 4.92478, 11.6834)
+height = 3.27295
+
+[node name="Column4" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(2.4111, 0, 0, 0, 6.18191, 0, 0, 0, 2.4111, -4.00153, 4.92478, 11.6834)
+height = 3.27295
+
+[node name="Column2" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(2.4111, 0, 0, 0, 6.18191, 0, 0, 0, 2.4111, 8.85935, 4.92478, -11.8303)
+height = 3.27295
+
+[node name="Column3" type="CSGCylinder3D" parent="Building"]
+transform = Transform3D(2.4111, 0, 0, 0, 6.18191, 0, 0, 0, 2.4111, -4.26878, 4.92478, -11.8303)
+height = 3.27295

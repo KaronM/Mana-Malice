@@ -1,0 +1,220 @@
+[gd_scene load_steps=15 format=3 uid="uid://tiae01jxtfuc"]
+
+[ext_resource type="PackedScene" uid="uid://cfu8m3htj0au4" path="res://Scenes/Player/player.tscn" id="1_cnvyv"]
+[ext_resource type="ArrayMesh" uid="uid://b3gf2kpje6tct" path="res://Assets/Furniture/10240_Office_Desk_v3_max2011.obj" id="2_ekm78"]
+[ext_resource type="PackedScene" uid="uid://c10kqj2g4x3ws" path="res://Assets/Furniture/Furniture-BookShelf.blend" id="3_vcuma"]
+[ext_resource type="PackedScene" uid="uid://c0pekwg2gsr5p" path="res://Assets/Furniture/sconce_scene.blend" id="4_7hov7"]
+[ext_resource type="PackedScene" uid="uid://bmlsab3s5a5e2" path="res://Scenes/Entities/character.tscn" id="5_g72qw"]
+[ext_resource type="Resource" uid="uid://cfvgmaq6glihv" path="res://Scenes/Dialogue/Vane.dialogue" id="6_0f3se"]
+[ext_resource type="Texture2D" uid="uid://bvnd2ejmb2chq" path="res://Assets/Characters/E1/NPCS/Vane-removebg-preview.png" id="6_qrcw0"]
+
+[sub_resource type="Environment" id="Environment_jjgbg"]
+background_energy_multiplier = 0.83
+ambient_light_color = Color(0.418483, 0.447837, 0.431362, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g72qw"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(0, 0.2334, 0.233602, 1)
+rim = 0.0
+rim_tint = 0.24
+refraction_enabled = true
+refraction_scale = 0.25
+refraction_texture_channel = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f3se"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(9.62615e-08, 0.62104, 0.629311, 1)
+refraction_enabled = true
+refraction_scale = 0.25
+refraction_texture_channel = 2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ekm78"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hov7"]
+size = Vector3(1, 1.3, 2.7)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7hov7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcuma"]
+size = Vector3(0.3, 7.3, 2.2)
+
+[node name="Office" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(12.1215, 0, 0, 0, 0.211449, 0, 0, 0, 10.8162, -0.111961, -0.0639544, -1.09611)
+use_collision = true
+
+[node name="Buildings" type="Node" parent="."]
+
+[node name="Building1" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 0.7, 0, 0, 0, 1, -4.3, -9.9, -24.1)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building1"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building2" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.624, 0, 0, 0, 1, 11.5, -15, -23.5)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building2"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building8" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.624, 0, 0, 0, 1, 29.8, -22.3, 11.2)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building8"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building9" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.9488, 0, 0, 0, 1.1, 32.8, -27.3, -18)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building9"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building5" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.624, 0, 0, 0, 1, -5.1, -9.8, -48.8)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building5"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building6" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.624, 0, 0, 0, 1, -21.3, -18.8, -24.2)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building6"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building7" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.624, 0, 0, 0, 1, -23, -20.8, -54)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building7"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building3" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 1.33, 0, 0, 0, 1, 29.7, -20.9, -4.1)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building3"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Building4" type="CSGCombiner3D" parent="Buildings"]
+transform = Transform3D(0.6, 0, 0, 0, 0.7, 0, 0, 0, 1, 11.9, -6.9, -42.2)
+use_collision = true
+
+[node name="Base" type="CSGBox3D" parent="Buildings/Building4"]
+transform = Transform3D(12.8227, 0, 0, 0, 10.3713, 0, 0, 0, 8.95704, 0.404438, 4.70956, -0.780943)
+calculate_tangents = false
+size = Vector3(1, 2, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_cnvyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jjgbg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.998159, 0.027148, -0.0542304, 0.00625244, 0.843381, 0.53728, 0.060323, -0.53663, 0.841659, -4, 19, 16)
+light_angular_distance = 85.45
+
+[node name="Main" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.65, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.7)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, 4.9)
+calculate_tangents = false
+
+[node name="Wall4" type="CSGBox3D" parent="Main"]
+transform = Transform3D(18.29, 0, 0, 0, 4.5864, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+
+[node name="WindowOpening1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.2, -0.153846, 0.9, -5.8)
+operation = 2
+calculate_tangents = false
+
+[node name="Window1" type="CSGBox3D" parent="Main"]
+transform = Transform3D(14.632, 0, 0, 0, 3.66912, 0, 0, 0, 0.04, -0.153846, 0.9, -5.8)
+calculate_tangents = false
+material = SubResource("StandardMaterial3D_g72qw")
+
+[node name="Wall2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, 9.07692, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="WindowOpening2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-1.70961e-07, 0, -0.22, 0, 4.12776, 0, 3.91113, 0, -9.6165e-09, 9.07692, 0.9, -0.3)
+operation = 2
+calculate_tangents = false
+
+[node name="Window2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-1.70961e-07, 0, -0.176, 0, 4.12776, 0, 3.91113, 0, -7.6932e-09, 9.07692, 0.9, -0.3)
+calculate_tangents = false
+material = SubResource("StandardMaterial3D_0f3se")
+
+[node name="Wall3" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.74892e-07, 0, -0.2, 0, 4.5864, 0, 10.8643, 0, -8.74228e-09, -9.38461, 0.9, -0.3)
+calculate_tangents = false
+
+[node name="Furniture" type="Node" parent="."]
+
+[node name="Desk" type="MeshInstance3D" parent="Furniture"]
+transform = Transform3D(-7.86805e-10, -0.015, -6.55671e-10, 0, -6.55671e-10, 0.015, -0.018, 6.55671e-10, 2.86603e-17, 3, 0, -1)
+mesh = ExtResource("2_ekm78")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Furniture/Desk"]
+transform = Transform3D(1, 4.55476e-15, -5.4297e-22, -4.55476e-15, 1, 0, 5.4297e-22, 2.4731e-36, 1, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_ekm78")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/Desk/StaticBody3D"]
+transform = Transform3D(-182.006, 6.82121e-13, 4.06576e-20, -1.09139e-11, 72.5012, -7.16227e-12, 1.12215e-17, -1.01181e-10, -32.2782, 0, 3.62506, 39.2301)
+shape = SubResource("BoxShape3D_7hov7")
+
+[node name="BookShelf" parent="Furniture" instance=ExtResource("3_vcuma")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.5, 0, -1.3)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Furniture/BookShelf"]
+transform = Transform3D(1, 4.55476e-15, -5.4297e-22, -4.55476e-15, 1, 0, 5.4297e-22, 2.4731e-36, 1, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_7hov7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/BookShelf/StaticBody3D"]
+transform = Transform3D(6.75906, -6.2528e-15, 8.88178e-16, -1.09774e-13, -0.472455, 6.96779e-13, 2.84217e-14, -1.04171e-12, -0.29922, 0.00861239, 1.49744, 0.0487642)
+shape = SubResource("BoxShape3D_vcuma")
+
+[node name="sconce_scene" parent="Furniture" instance=ExtResource("4_7hov7")]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 5.9, 2, -4)
+
+[node name="sconce_scene2" parent="Furniture" instance=ExtResource("4_7hov7")]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 5.9, 2, 2)
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="Vane" parent="Characters" instance=ExtResource("5_g72qw")]
+transform = Transform3D(1, 0, 0, 0, 1.872, 0, 0, 0, 1, 0, 1, -2)
+characterPNG = ExtResource("6_qrcw0")
+characterName = "Vane"
+dialogueResource = ExtResource("6_0f3se")

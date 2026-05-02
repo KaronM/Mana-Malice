@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS Suspect(
     current_aggression INT,
     current_compliance INT,
     personality TEXT,
-    is_guilty boolean
+    is_guilty boolean,
+    speech_patterns TEXT,
+    stubborness FLOAT
 );
 
 CREATE TYPE observation_type AS ENUM (

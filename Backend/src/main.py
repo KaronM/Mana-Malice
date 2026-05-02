@@ -7,6 +7,7 @@ from rag import run_agent
 import psycopg2
 from psycopg2 import pool
 from contextlib import asynccontextmanager
+from knn import getMood
 import classes
 
 env_path = Path(__file__).parent.parent / ".env"
@@ -50,8 +51,11 @@ async def get_ac_stats(suspect_id: int):
         cur = conn.cursor()
         cur.execute('SELECT base_aggression,base_compliance FROM suspect WHERE id = %s', (suspect_id,))
         
-        return cur.fetchone()
+        acStats = cur.fetchone()
     
+        mood = getMood(acStats[0], acStats[1])
+
+        return [acStats[0], acStats[1], mood]
     except Exception as e:
         print("stat collection Failed: ", e)
     finally:
@@ -70,16 +74,19 @@ async def create_suspect(IRequest: classes.InterrogationRequest):
         suspect_name = suspect[1]
         ac = [IRequest.aggression,IRequest.compliance]
         suspect_personality = suspect[4]
-
+        suspect_speech_patterns = suspect[8]
+        stubborness = suspect[9]
         guiltiness = suspect[5]
 
-        suspect_object = classes.Suspect(suspect_id=IRequest.suspect_id, name=suspect_name, db_conn=conn, ac_stats=ac, is_guilty=guiltiness,personality = suspect_personality, current_focus=IRequest.current_focus)
+        suspect_object = classes.Suspect(suspect_id=IRequest.suspect_id, name=suspect_name, db_conn=conn, ac_stats=ac, is_guilty=guiltiness,personality = suspect_personality, current_focus=IRequest.current_focus, questions_asked=IRequest.questionsAsked, current_mood=IRequest.current_mood, unfocused_streak=IRequest.unfocused_streak, speech_pattern=suspect_speech_patterns, stubborness=stubborness)
         
         print("suspect info: ", suspect)
 
         response = await run_agent(suspect_object, IRequest)
 
-        return response
+        response["mood"] = getMood(response["updated aggression"], response["updated compliance"])
+
+        return response 
     
     except Exception as e:
         print("Connection Failed: ", e)
