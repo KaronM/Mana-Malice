@@ -19,8 +19,6 @@ Tech Stack:
 
 ![alt text](<screenshots/Screenshot 2026-05-02 at 5.04.28 PM.png>)
 
-![alt text](<screenshots/Screenshot 2026-05-02 at 5.04.51 PM.png>)
-
 ![alt text](<screenshots/Screenshot 2026-05-02 at 5.05.07 PM.png>)
 
 ### Link to Slides
